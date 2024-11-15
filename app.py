@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 nimgs = 10
 
-imgBackground=cv2.imread("background.png")
+imgBackground=cv2.imread("Designer.png")
 
 datetoday = date.today().strftime("%m_%d_%y")
 datetoday2 = date.today().strftime("%d-%B-%Y")
@@ -122,7 +122,8 @@ def start():
             cv2.rectangle(frame,(x,y-40),(x+w,y),(50,50,255),-1)
             cv2.putText(frame, f'{identified_person}', (x,y-15), cv2.FONT_HERSHEY_COMPLEX, 1, (255,255,255), 1)
             cv2.rectangle(frame, (x,y), (x+w, y+h), (50,50,255), 1)
-        imgBackground[162:162 + 480, 55:55 + 640] = frame
+        frame_resized = cv2.resize(frame, (640, 480))
+        imgBackground[162:162 + 480, 55:55 + 640] = frame_resized
         cv2.imshow('Attendance', imgBackground)
         if cv2.waitKey(1) == 27:
             break
